@@ -1,58 +1,80 @@
 <?php
 
-	/*
-		OBS!
-		Om ni undrar vad någon av funktionerna nedanför gör, eller
-		vad t.ex. $_POST är förnågot så skulle jag rekommendera att
-		googla på funktionen och antingen kolla på W3Schools eller
-		PHP's officiella dokumentation. (W3Schools är mer nybörjarvänligt)
+/*
+	OBS!
+	If you're wondering about any of the functions below, or what
+	$_POST is, I'd like to recommend googling it and either check
+	it out at W3Schools or at PHP's official documentation
+	(W3Schools is more beginner friendly)
 
-		
-		(Sammanfattning för vad PHP-koden nedan gör)
-		
-		* Kollar ifall formuläret skickats, i så fall gör följande:
-			* Kolla om användaren ville registrera eller logga in
-				* Ifall användaren ville registrera så hantera
-				  informationen från formuläret och skriv den till
-				  filen och meddela användaren att han/hon är registrerad
+	
+	(Summary of what the PHP-code below does)
+	
+	* Check if the form has been sent, in that case do the following:
+		* Check if the user wanted to register or log in
+			* If the user want to register then format the
+				data from the form and write it to the file
+				and tell the user that they've been registered
 
-				* Ifall användaren inte ville registrera så antar vi
-				  att användaren ville logga in.
-				  Hämta all information från filen och jämför användarnamnen
-				  med det som skickades med formuläret.
+			* If the user don't want to register, we'll assume that
+				they want to log in.
+				Get all the user information from the file and compare
+				the usernames with the one sent in the form.
 
-	*/
+				* If the username matched with one of the
+					registered ones, compare the passwords
 
-	if(isset($_POST['type'])){  // Kollar ifall formuläret skickats
+					* If the passwords match, tell the user
+						that they're logged in
 
-		if($_POST['type'] == "register"){   // Kollar ifall användaren klickade "register"
-			
-			$handle = fopen('users.txt', 'a');  // Öppna filen för skrivning och ange $handle som referens till filen
-		
-			$string = $_POST['username'] . ',' . $_POST['password'] . PHP_EOL;
-
-			fwrite($handle, $string);   // Skriv $string till filen
-
-			fclose($handle);    // Stäng filen (så att den kan öppnas senare)
-
-			echo "Du har registrerats!";    // Meddela användaren om att registreringen gick igenom
-
-		}else{  // Ifall användaren inte ville registrera antar vi att han/hon ville logga in
-
-			$handle = fopen('users.txt', 'r');  // Öppna filen för att läsas och ange $handle som referens till filen
-
-			// OBS! Detta är en while-loop, se följande: https://www.w3schools.com/php/php_looping.asp
-			while (!feof($handle)) {	
-
-				$row = fgets($handle);
+					* If the password didn't match, tell the user
+						that either the username or password was wrong
 				
-				echo $row.'<br>';
+				* If none of the usernames match, tell the user
+					that either the username or password was wrong
+*/
+
+	if(isset($_POST['type'])){  // Checks if the form has been sent
+
+		if($_POST['type'] == "register"){   // Check if the user clicked "register"
+			
+			$handle = fopen('users.txt', 'a');  // Open the file for writing and assign $handle as reference
+		
+			$string = $_POST['username'] . ',' . $_POST['password'] . PHP_EOL; // Format the data and put it in $string
+
+			fwrite($handle, $string);   // Write $string to the file
+
+			fclose($handle);    // Close the file (so that it may be opened later)
+
+			echo "Du har registrerats!";    // Tell the user that the registration went through
+
+		}else{  // If the user don't want to register we'll assume that they want to log in
+
+			$handle = fopen('users.txt', 'r');	// Open the file for reading and assign $handle as reference
+			
+			$users = array();	// Create array for storing the user-data from the file temporarily
+
+			// OBS! This is a while-loop, see the following: https://www.w3schools.com/php/php_looping.asp
+			while (!feof($handle)) {	// If the current row isn't the last
+
+				$row = fgets($handle);	// Get the current row and put it in $row
+				
+				$users[] = $row;	// Put the users information in a pocket of the array
 
 			}
 
-			fclose($handle);
+			fclose($handle);	// Close the file (so that it may be opened later)
 
-			
+			// OBS! This is the part where we compare the form-data with the data from the file
+
+			$array_lenght = count($users); // Count how many pockets the array has (how many users there are in the array)
+
+			// OBS! This is a for-loop, see the following: https://www.w3schools.com/php/php_looping.asp
+			for($i = 0; $i < $array_lenght; $i++){ // Run the loop as many times as there are users, add +1 to the $i counter after each loop
+
+				
+
+			}
 
 		}
 
