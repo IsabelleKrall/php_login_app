@@ -72,7 +72,7 @@
 			// OBS! This is a for-loop, see the following: https://www.w3schools.com/php/php_looping.asp
 			for($i = 0; $i < $array_lenght; $i++){ // Run the loop as many times as there are users, add +1 to the $i counter after each loop
 
-				
+				// TODO: compare the file-data with the form-data
 
 			}
 
