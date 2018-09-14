@@ -73,7 +73,7 @@
 			for($i = 0; $i < $array_lenght; $i++){ // Run the loop as many times as there are users, add +1 to the $i counter after each loop
 
 				// TODO: compare the file-data with the form-data
-
+				
 			}
 
 		}
@@ -94,10 +94,10 @@
 	<!-- Register -->
 	<h2>Register</h2>
 	<form action="?" method="post">
-		<p>Username</p>
-		<input type="text" name="username" require>
-		<p>Password</p>
-		<input type="password" name="password" require>
+		<label for="name" >Username</label>
+		<input id="name" type="text" name="username" require>
+		<label for="pass">Password</label>
+		<input id="pass" type="password" name="password" require>
 		<input name="type" type="submit" value="register">
 	</form>
 	
@@ -108,10 +108,10 @@
 	<!-- Login -->
 	<h2>Login</h2>
 	<form action="?" method="post">
-		<p>Username</p>
-		<input type="text" name="username" require>
-		<p>Password</p>
-		<input type="password" name="password" require>
+		<label for="name" >Username</label>
+		<input id="name" type="text" name="username" require>
+		<label for="pass">Password</label>
+		<input id="pass" type="password" name="password" require>
 		<input name="type" type="submit" value="login">
 	</form>
 </body>
