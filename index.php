@@ -36,7 +36,7 @@
 
 if(isset($_POST['type'])){  // Checks if the form has been sent
 
-	if($_POST['type'] == "register"){   // Check if the user clicked "register"
+	if($_POST['type'] === "register"){   // Check if the user clicked "register"
 		
 		$handle = fopen('users.txt', 'a');  // Open the file for writing and assign $handle as reference
 	
@@ -46,7 +46,10 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 
 		fclose($handle);    // Close the file (so that it may be opened later)
 
-		echo "Du har registrerats!";    // Tell the user that the registration went through
+		echo "You're registered! Now try logging in!";    // Tell the user that the registration went through
+		echo "<br><a href=\"?\">Click me to go back!</a>";	// This button i used to "redirect" back to the index.php page, this is done to clear the $_POST variable from the browser
+
+		exit;	// Exit the PHP script (Stop running the code entirely)
 
 	}else{  // If the user don't want to register we'll assume that they want to log in
 
@@ -61,7 +64,7 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 
 			$tmp = explode(',', $row);	// Separate the row into username and password and store it in a temporary variable
 			
-			$users[] = $tmp;	// Put the users information in a pocket of the array
+			$users[] = $tmp;	// Put the users information in an index in the array
 
 		}
 
@@ -71,7 +74,7 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 		// OBS! This is the part where we compare the form-data with the data from the file
 
 
-		$array_lenght = count($users); // Count how many pockets the array has (how many users there are in the array)
+		$array_lenght = count($users); // Count how many indexes the array has (how many users there are in the array)
 
 		// OBS! This is a for-loop, see the following: https://www.w3schools.com/php/php_looping.asp
 		for($i = 0; $i < $array_lenght; $i++){ // Run the loop as many times as there are users, add +1 to the $i counter after each loop
@@ -79,16 +82,22 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 			// TODO: compare the file-data with the form-data
 			// $users[$i] accesses the index equal to the value of $i
 			// $users[$i][0] accesses the first index inside the index equal to the value of $i
-			if($users[$i][0] == $_POST['username']){	// If the file-username matches the form-username
-				if($users[$i][1] == $_POST['password']){	// Check if the file-password matches the form-password
-					echo "We found your data and you're logged in!";
-				}else{
-					echo "Either the username or password was incorrect!";
+			if($users[$i][0] === $_POST['username']){	// If the file-username matches the form-username
+
+				if($users[$i][1] === $_POST['password']){	// Check if the file-password matches the form-password
+
+					echo "We found your data and you're logged in until you refresh or update the page.";	// We currently have no method to keep the user logged in accross different instances.
+					break;	// break ends execution of the current for, foreach, while, do-while or switch structure. 
+
 				}
-			}else{
-				echo "Either the username or password was incorrect!";
+			}elseif($i === ($array_lenght - 1)){	// If we've compared the last user
+
+				echo "Either the username or password was incorrect.";	// Tell the user that their input-data didn't match.
+				break;	// break ends execution of the current for, foreach, while, do-while or switch structure.
+
 			}
 		}
+
 	}
 }
 
@@ -106,10 +115,10 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 	<!-- Register -->
 	<h2>Register</h2>
 	<form action="?" method="post">
-		<label for="name" >Username</label>
-		<input id="name" type="text" name="username" require>
-		<label for="pass">Password</label>
-		<input id="pass" type="password" name="password" require>
+		<label for="name" >Username</label><br>
+		<input id="name" type="text" name="username" require><br>
+		<label for="pass">Password</label><br>
+		<input id="pass" type="password" name="password" require><br>
 		<input name="type" type="submit" value="register">
 	</form>
 
@@ -120,10 +129,10 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 	<!-- Login -->
 	<h2>Login</h2>
 	<form action="?" method="post">
-		<label for="name" >Username</label>
-		<input id="name" type="text" name="username" require>
-		<label for="pass">Password</label>
-		<input id="pass" type="password" name="password" require>
+		<label for="name" >Username</label><br>
+		<input id="name" type="text" name="username" require><br>
+		<label for="pass">Password</label><br>
+		<input id="pass" type="password" name="password" require><br>
 		<input name="type" type="submit" value="login">
 	</form>
 </body>
