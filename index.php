@@ -34,52 +34,51 @@
 					that either the username or password was wrong
 */
 
-	if(isset($_POST['type'])){  // Checks if the form has been sent
+if(isset($_POST['type'])){  // Checks if the form has been sent
 
-		if($_POST['type'] == "register"){   // Check if the user clicked "register"
-			
-			$handle = fopen('users.txt', 'a');  // Open the file for writing and assign $handle as reference
+	if($_POST['type'] == "register"){   // Check if the user clicked "register"
 		
-			$string = $_POST['username'] . ',' . $_POST['password'] . ',' . PHP_EOL; // Format the data and put it in $string
+		$handle = fopen('users.txt', 'a');  // Open the file for writing and assign $handle as reference
+	
+		$string = $_POST['username'] . ',' . $_POST['password'] . ',' . PHP_EOL; // Format the data and put it in $string
 
-			fwrite($handle, $string);   // Write $string to the file
+		fwrite($handle, $string);   // Write $string to the file
 
-			fclose($handle);    // Close the file (so that it may be opened later)
+		fclose($handle);    // Close the file (so that it may be opened later)
 
-			echo "Du har registrerats!";    // Tell the user that the registration went through
+		echo "Du har registrerats!";    // Tell the user that the registration went through
 
-		}else{  // If the user don't want to register we'll assume that they want to log in
+	}else{  // If the user don't want to register we'll assume that they want to log in
 
-			$handle = fopen('users.txt', 'r');	// Open the file for reading and assign $handle as reference
+		$handle = fopen('users.txt', 'r');	// Open the file for reading and assign $handle as reference
+		
+		$users = array();	// Create array for storing the user-data from the file temporarily
+
+		// OBS! This is a while-loop, see the following: https://www.w3schools.com/php/php_looping.asp
+		while (!feof($handle)) {	// If the current row isn't the last
+
+			$row = fgets($handle);	// Get the current row and put it in $row
 			
-			$users = array();	// Create array for storing the user-data from the file temporarily
-
-			// OBS! This is a while-loop, see the following: https://www.w3schools.com/php/php_looping.asp
-			while (!feof($handle)) {	// If the current row isn't the last
-
-				$row = fgets($handle);	// Get the current row and put it in $row
-				
-				$users[] = $row;	// Put the users information in a pocket of the array
-
-			}
-
-			fclose($handle);	// Close the file (so that it may be opened later)
-
-			// OBS! This is the part where we compare the form-data with the data from the file
-
-			$array_lenght = count($users); // Count how many pockets the array has (how many users there are in the array)
-
-			// OBS! This is a for-loop, see the following: https://www.w3schools.com/php/php_looping.asp
-			for($i = 0; $i < $array_lenght; $i++){ // Run the loop as many times as there are users, add +1 to the $i counter after each loop
-
-				// TODO: compare the file-data with the form-data
-				if($users[$i] == $_POST[''])
-
-			}
+			$users[] = $row;	// Put the users information in a pocket of the array
 
 		}
 
+		fclose($handle);	// Close the file (so that it may be opened later)
+
+		// OBS! This is the part where we compare the form-data with the data from the file
+
+		$array_lenght = count($users); // Count how many pockets the array has (how many users there are in the array)
+
+		// OBS! This is a for-loop, see the following: https://www.w3schools.com/php/php_looping.asp
+		for($i = 0; $i < $array_lenght; $i++){ // Run the loop as many times as there are users, add +1 to the $i counter after each loop
+
+			// TODO: compare the file-data with the form-data
+			if($users[$i][1] == $_POST['username']){
+
+			}
+		}
 	}
+}
 
 
 ?>
