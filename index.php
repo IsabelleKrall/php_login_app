@@ -58,14 +58,18 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 		while (!feof($handle)) {	// If the current row isn't the last
 
 			$row = fgets($handle);	// Get the current row and put it in $row
+
+			$tmp = explode(',', $row);	// Separate the row into username and password and store it in a temporary variable
 			
-			$users[] = $row;	// Put the users information in a pocket of the array
+			$users[] = $tmp;	// Put the users information in a pocket of the array
 
 		}
 
 		fclose($handle);	// Close the file (so that it may be opened later)
 
+
 		// OBS! This is the part where we compare the form-data with the data from the file
+
 
 		$array_lenght = count($users); // Count how many pockets the array has (how many users there are in the array)
 
@@ -73,8 +77,16 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 		for($i = 0; $i < $array_lenght; $i++){ // Run the loop as many times as there are users, add +1 to the $i counter after each loop
 
 			// TODO: compare the file-data with the form-data
-			if($users[$i][1] == $_POST['username']){
-
+			// $users[$i] accesses the index equal to the value of $i
+			// $users[$i][0] accesses the first index inside the index equal to the value of $i
+			if($users[$i][0] == $_POST['username']){	// If the file-username matches the form-username
+				if($users[$i][1] == $_POST['password']){	// Check if the file-password matches the form-password
+					echo "We found your data and you're logged in!";
+				}else{
+					echo "Either the username or password was incorrect!";
+				}
+			}else{
+				echo "Either the username or password was incorrect!";
 			}
 		}
 	}
@@ -100,8 +112,8 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 		<input id="pass" type="password" name="password" require>
 		<input name="type" type="submit" value="register">
 	</form>
-	
-	
+
+
 	<br><br><br><br>
 
 
