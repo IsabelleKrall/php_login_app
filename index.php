@@ -116,9 +116,9 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 	<h2>Register</h2>
 	<form action="?" method="post">
 		<label for="name" >Username</label><br>
-		<input id="name" type="text" name="username" require><br>
+		<input id="name" type="text" name="username" required><br>
 		<label for="pass">Password</label><br>
-		<input id="pass" type="password" name="password" require><br>
+		<input id="pass" type="password" name="password" required><br>
 		<input name="type" type="submit" value="register">
 	</form>
 
@@ -130,9 +130,9 @@ if(isset($_POST['type'])){  // Checks if the form has been sent
 	<h2>Login</h2>
 	<form action="?" method="post">
 		<label for="name" >Username</label><br>
-		<input id="name" type="text" name="username" require><br>
+		<input id="name" type="text" name="username" required><br>
 		<label for="pass">Password</label><br>
-		<input id="pass" type="password" name="password" require><br>
+		<input id="pass" type="password" name="password" required><br>
 		<input name="type" type="submit" value="login">
 	</form>
 </body>
