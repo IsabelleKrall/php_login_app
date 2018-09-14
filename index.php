@@ -40,7 +40,7 @@
 			
 			$handle = fopen('users.txt', 'a');  // Open the file for writing and assign $handle as reference
 		
-			$string = $_POST['username'] . ',' . $_POST['password'] . PHP_EOL; // Format the data and put it in $string
+			$string = $_POST['username'] . ',' . $_POST['password'] . ',' . PHP_EOL; // Format the data and put it in $string
 
 			fwrite($handle, $string);   // Write $string to the file
 
@@ -73,7 +73,8 @@
 			for($i = 0; $i < $array_lenght; $i++){ // Run the loop as many times as there are users, add +1 to the $i counter after each loop
 
 				// TODO: compare the file-data with the form-data
-				
+				if($users[$i] == $_POST[''])
+
 			}
 
 		}
