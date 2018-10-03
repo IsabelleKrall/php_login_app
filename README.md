@@ -6,3 +6,7 @@ Note that the user-information is available for anyone with access to the applic
 Once again, this app is only for educational purposes! **do not write any sensible passwords into the password field!**
 
 license: MIT
+
+
+
+<img src="https://gph.is/1P2kYrb" alt="Best coder is.... VINCENT!">
